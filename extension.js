@@ -4,28 +4,30 @@ const { exec } = require('child_process');
 let statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
 
 function updateGpuUsageAndMemory() {
-  exec('nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader,nounits', (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`);
-      return;
-    }
+  exec('nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits', (error, stdout, stderr) => {
+    if (error || stderr) return;
 
-    let [gpuUsage, memoryUsedInMiB] = stdout.trim().split(', ');
-    let memoryUsedInGB = parseFloat(memoryUsedInMiB) / 1024;
+    const lines = stdout.trim().split('\n');
 
-    statusBar.text = `GPU: ${gpuUsage}% ${memoryUsedInGB.toFixed(2)} GB`;
+    const gpuStats = lines.map(line => {
+      const [usage, used, total] = line.split(', ').map(Number);
+      const usageStr = `${usage.toString().padStart(3)}%`;
+      const memUsed = (used / 1024).toFixed(2);
+      const memTotal = (total / 1024).toFixed(2);
+      const memStr = `${memUsed.padStart(5)}/${memTotal}GB`;
+      return `${usageStr} ${memStr}`;
+    });
+
+    statusBar.text = `GPU: ${gpuStats.join(' | ')}`;
     statusBar.show();
   });
 }
 
+
 function activate(context) {
   context.subscriptions.push(statusBar);
   updateGpuUsageAndMemory();
-  setInterval(updateGpuUsageAndMemory, 2000); 
+  setInterval(updateGpuUsageAndMemory, 2000);
 }
 
 exports.activate = activate;
