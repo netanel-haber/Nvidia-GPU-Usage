@@ -1,23 +1,15 @@
 {
 	"name": "nvidia-gpu",
 	"description": "Shows the GPU usage in the bottom bar",
-	"version": "0.0.4",
-	"publisher": "Leonardo16",
-	"icon": "icon.png",
+	"version": "0.1.0",
+	"publisher": "Netanel Haber",
 	"displayName": "Nvidia GPU usage",
-	"repository": "https://github.com/Leonardo16AM/Codeforces-Notifier",
+	"repository": "https://github.com/netanel-haber/Nvidia-GPU-Usage",
 	"engines": {
 		"vscode": "^1.74.0"
 	},
 	"activationEvents": [
 		"onStartupFinished"
 	],
-	"main": "./extension.js",
-	"contributes": {
-		"configuration": {
-			"title": "Nvidia GPU usage",
-			"properties": {}
-		}
-	},
-	"scripts": {}
+	"main": "./extension.js"
 }
