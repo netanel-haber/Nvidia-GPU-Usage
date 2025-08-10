@@ -18,7 +18,7 @@ function updateGpuUsageAndMemory() {
       return `${usageStr} ${memStr}`;
     });
 
-    statusBar.text = `GPU: ${gpuStats.join(' | ')}`;
+    statusBar.text = gpuStats.join(' | ');
     statusBar.show();
   });
 }
