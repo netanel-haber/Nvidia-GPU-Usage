@@ -11,6 +11,5 @@
 	"activationEvents": [
 		"onStartupFinished"
 	],
-	"main": "./extension.js",
-        "files": ["./extension.js", "package.json"]
+	"main": "./extension.js"
 }
