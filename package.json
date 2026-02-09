@@ -1,8 +1,8 @@
 {
-	"name": "nvidia-gpu",
-	"description": "Shows the GPU usage in the bottom bar",
+	"name": "all-nvidia-gpus",
+	"description": "Shows all GPU's usage in the bottom bar. Fork of: https://marketplace.visualstudio.com/items?itemName=Leonardo16.nvidia-gpu",
 	"version": "1.0.0",
-	"publisher": "Netanel-Haber",
+	"publisher": "NetanelHaber",
 	"displayName": "Nvidia GPU usage",
 	"repository": "https://github.com/netanel-haber/Nvidia-GPU-Usage",
 	"engines": {
